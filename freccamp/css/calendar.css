@@ -1,0 +1,154 @@
+/*==================   RD Calendar    =====================*/
+.rd-calendar {
+  position: relative;
+  background: #fcfcfc;
+  color: #555555; }
+  * + .rd-calendar {
+    margin-top: 30px; }
+
+.rdc-panel {
+  position: relative;
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 300;
+  text-align: center; }
+  .rdc-panel_1 {
+    position: relative;
+    padding: 20px 0 25px;
+    font-size: 12px;
+    font-weight: bold; }
+    .rdc-panel_1 div, .rdc-panel_1 span {
+      opacity: .5; }
+    .rdc-panel_1 .rdc-today_date {
+      font-size: 72px;
+      line-height: 82px;
+      font-weight: 100;
+      opacity: 1; }
+  .rdc-panel_2 {
+    position: relative;
+    padding: 15px 0; }
+  .rdc-panel.bg02, .rdc-panel .bg02 {
+    color: #fff; }
+    .rdc-panel.bg02 .rdc-next, .rdc-panel.bg02 .rdc-prev, .rdc-panel .bg02 .rdc-next, .rdc-panel .bg02 .rdc-prev {
+      color: #fff; }
+
+.rdc-next, .rdc-prev, .rdc-events_close {
+  font: 400 18px/18px "FontAwesome";
+  cursor: pointer;
+  -moz-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+  opacity: .5;
+  position: absolute;
+  top: 50%;
+  margin-top: -9px; }
+  .rdc-next:hover, .rdc-prev:hover, .rdc-events_close:hover {
+    opacity: 1; }
+
+.rdc-next {
+  right: 20px; }
+  .rdc-next:before {
+    content: '\f105'; }
+
+.rdc-prev {
+  left: 20px; }
+  .rdc-prev:before {
+    content: '\f104'; }
+
+.rdc-events_close {
+  top: 0;
+  right: 0;
+  margin-top: 7px;
+  margin-right: 7px;
+  color: #fb0000; }
+  .rdc-events_close:before {
+    content: '\f00d'; }
+
+.rdc-events {
+  opacity: 0;
+  visibility: hidden;
+  overflow: auto;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  max-height: 100%; }
+  .rd-calendar.show-events .rdc-events {
+    opacity: 1;
+    visibility: visible; }
+
+.rdc-event time {
+  color: #fb0000; }
+  .rdc-event time + * {
+    padding-top: 10px; }
+
+.rdc-event {
+  display: none;
+  background: #f2f2f2;
+  padding: 20px;
+  text-align: left; }
+  .rdc-event.active {
+    display: block; }
+
+.rdc-table {
+  position: relative;
+  padding: 5px 7px 20px;
+  background: #fcfcfc; }
+  @media (max-width: 979px) and (min-width: 768px) {
+    .rdc-table {
+      padding-left: 0;
+      padding-right: 0; } }
+  .rdc-table table {
+    border-spacing: 4px;
+    border-collapse: separate;
+    width: 100%; }
+  .rdc-table td {
+    position: relative; }
+
+.rdc-table_day {
+  color: #fb0000;
+  padding: 10px 0 5px 0;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 24px;
+  font-weight: bold; }
+
+.rdc-table_date {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 24px;
+  font-weight: 400;
+  padding: 3px;
+  color: #555555;
+  text-align: center;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.rdc-table_today {
+  font-weight: bold;
+  color: #000; }
+
+.rdc-table_event {
+  cursor: pointer;
+  font-weight: bold;
+  color: #fb0000;
+  -moz-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease; }
+  .rdc-table_event:hover {
+    color: #fff;
+    background-color: #fb0000; }
+
+.rdc-table_next,
+.rdc-table_prev {
+  opacity: .5; }
+
+@media (min-width: 768px) and (max-width: 979px) {
+  .rdc-next {
+    right: 10px; }
+
+  .rdc-prev {
+    left: 10px; } }

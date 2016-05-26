@@ -1,17 +1,147 @@
-﻿
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>layout</title>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/grid.css" />
+    <link rel="stylesheet" href="/css/owl-carousel.css" />
+    <link rel="stylesheet" href="/css/search.css" />
+    <link rel="stylesheet" href="/css/calendar.css" />
+    <link rel="stylesheet" href="/css/jquery.fancybox.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/formstyle.css" />
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery-migrate-1.2.1.js"></script>
+    <script src="/js/regutils.js"></script>
+    <!--[if lt IE 9]>
+    <html class="lt-ie9">
+    <div style=' clear: both; text-align:center; position: relative;'>
+      <a href="http://windows.microsoft.com/en-US/internet-explorer/..">
+        <img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820"
+             alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."/>
+      </a>
+    </div>
+    <script src="js/html5shiv.js"></script>
+    <![endif]-->
+    <script src='/js/device.min.js'></script>
 </head>
 <body>
-    <div> 
+    <div class="page">
+        <div class="wrap">
+            <!--========================================================
+                                      HEADER
+            =========================================================-->
+            <header class="bg01">
+                <div class="bb">
+                    <div class="container">
+                        <div class="brand">
+                            <h1 class="brand_name">
+                                <a href="./">Freedom Run Equestrian Center</a>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div id="stuck_container" class="stuck_container">
+                    <div class="container bg01">
+                        <nav class="nav">
+                            <ul class="sf-menu" data-type="navbar">
+                                <li>
+                                    @Html.ActionLink("Home", "index", "Home", routeValues: new { }, htmlAttributes: new { })
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Register", "index", "Register", routeValues: new { }, htmlAttributes: new { })
+                                </li>
+                                <li>
+                                    @Html.ActionLink("About Us", "index", "About", routeValues: new { }, htmlAttributes: new { })
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <!--========================================================
+                                      CONTENT
+            =========================================================-->
+            <main class="bg03 pt01">
+                @RenderBody()
+            </main>
+            <!--========================================================
+                                      FOOTER
+            =========================================================-->
+            <footer>
+                <div class="bg01">
+                    <section class="footer-top">
+                        <div class="container">
+                            <div class="row">
+                                <div class="grid_3">
+                                    <h4>How To Contact Us</h4>
+                                    <div class="box03">
+                                        <address>
+                                            <p>9863 - 9867 Mill Road, <br>Cambridge, MG09 99HT.</p>
+                                            <p>Telephone:  <a href="callto:#">+1 800 603 6035</a></p>
+                                            <p>E-mail: <a href="mailto:#">mail@demolink.org</a></p>
+                                        </address>
+                                    </div>
+                                    <div class="box03">
+                                        <address>
+                                            <p>9870 St Vincent Place,<br>Glasgow, DC 45 Fr 45.</p>
+                                            <p>Telephone:  <a href="callto:#">+1 800 603 6035</a></p>
+                                            <p>E-mail: <a href="mailto:#">mail@demolink.org</a></p>
+                                        </address>
+                                    </div>
+                                </div>
+                                <div class="grid_3">
+                                    <h4>On-Line Catalogs</h4>
+                                    <div class="box03">
+                                        <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut</p>
+                                    </div>
+                                    <div class="box03">
+                                        <p>In pede mi, aliquet sit amet, euismod in,auctor ut, ligula</p>
+                                    </div>
+                                    <div class="box03">
+                                        <p>Praesent justo dolor, lobortis quis, lobortis dignissim, pulvinar ac, lorem</p>
+                                    </div>
+                                </div>
+                                <div class="grid_3">
+                                    <h4>Special News</h4>
+                                    <div class="box03">
+                                        <p class="info"><a href="#"><time datetime="2014-11-12">12-11-2014</time></a></p>
+                                        <p class="info">by <a href="#">admin</a></p>
+                                        <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut</p>
+                                    </div>
+                                    <div class="box03">
+                                        <p class="info"><a href="#"><time datetime="2014-11-12">9-12-2014</time></a></p>
+                                        <p class="info">by <a href="#">admin</a></p>
+                                        <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut</p>
+                                    </div>
+                                </div>
+                                <div class="grid_3">
+                                    <h4>Links</h4>
+                                    <ul class="list01 sm">
+                                        <li><a href="#">Suspendisse sollicitudin velit sed leo</a></li>
+                                        <li><a href="#">Ut pharetra augue nec augue</a></li>
+                                        <li><a href="#">Nam elit agna,endrerit sit amet</a></li>
+                                        <li><a href="#">Tincidunt ac, viverra sed, nulla</a></li>
+                                        <li><a href="#">Donec porta diam eu massa</a></li>
+                                        <li><a href="#">Quisque diam lorem</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="container">
+                    <p class="copy">
+                        Taekwondo Times © <span id="copyright-year"></span> All Rights Reserved&nbsp; |&nbsp;
+                        <a href="index-5.html">Privacy Policy</a>
+                    </p>
+                    More Martial Arts Website Templates at <a rel="nofollow" href="http://www.templatemonster.com/category/martial-arts-website-templates/" target="_blank">TemplateMonster.com</a>
+                </div>
+            </footer>
+        </div>
     </div>
+    <script src="/js/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,23 @@
+﻿.formsectionheader {
+    margin-top: 10px;
+    background-color: #e0d7b3;
+    width: 100%;
+}
+
+.formlabel {
+    font-weight: bold;
+}
+
+.formentry {
+    margin-left: 5px;
+}
+
+.formentry input[type=text] {
+    font-size: 12pt;
+    width: 90%;
+}
+
+.formnote {
+    margin-left: 10px;
+    font-size: 9pt;
+}

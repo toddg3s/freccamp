@@ -34,8 +34,19 @@ namespace freccamp
           m =>
           {
             m.MapLeftKey("Id");
-            m.MapRightKey("Id");
+            m.MapRightKey("RegistrationId");
             m.ToTable("CampRegistration");
+          });
+
+      modelBuilder.Entity<Camper>().
+        HasMany(c => c.Registrations).
+        WithMany(r => r.Campers).
+        Map(
+          m =>
+          {
+              m.MapLeftKey("Id");
+              m.MapRightKey("RegistrationId");
+              m.ToTable("CamperRegistration");
           });
     }
   }
@@ -64,7 +75,7 @@ namespace freccamp
 
   public class Registration
   {
-    public int Id { get; set; }
+    public int RegistrationId { get; set; }
     public string ContactName { get; set; }
     public string ContactEmail { get; set; }
     public string ContactPhone { get; set; }
