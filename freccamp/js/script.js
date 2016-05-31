@@ -9,11 +9,11 @@ function isIE() {
 
 /* cookie.JS
  ========================================================*/
-include('js/jquery.cookie.js');
+include('/js/jquery.cookie.js');
 
 /* Easing library
  ========================================================*/
-include('js/jquery.easing.1.3.js');
+include('/js/jquery.easing.1.3.js');
 
 /* Stick up menus
  ========================================================*/
@@ -35,7 +35,7 @@ include('js/jquery.easing.1.3.js');
 (function ($) {
     var o = $('html');
     if (o.hasClass('desktop')) {
-        include('js/jquery.ui.totop.js');
+        include('/js/jquery.ui.totop.js');
 
         $(document).ready(function () {
             $().UItoTop({
@@ -52,7 +52,7 @@ include('js/jquery.easing.1.3.js');
 (function ($) {
     var o = $('[data-equal-group]');
     if (o.length > 0) {
-        include('js/jquery.equalheights.js');
+        include('/js/jquery.equalheights.js');
     }
 })(jQuery);
 
@@ -62,8 +62,8 @@ include('js/jquery.easing.1.3.js');
 (function ($) {
     var o = $('html');
     if (o.hasClass('desktop')) {
-        include('js/jquery.mousewheel.min.js');
-        include('js/jquery.simplr.smoothscroll.min.js');
+        include('/js/jquery.mousewheel.min.js');
+        include('/js/jquery.simplr.smoothscroll.min.js');
 
         $(document).ready(function () {
             $.srSmoothscroll({
@@ -89,14 +89,14 @@ include('js/jquery.easing.1.3.js');
  ========================================================*/
 ;
 (function ($) {
-    include('js/superfish.js');    
+    include('/js/superfish.js');    
 })(jQuery);
 
 /* Navbar
  ========================================================*/
 ;
 (function ($) {
-    include('js/jquery.rd-navbar.js');
+    include('/js/jquery.rd-navbar.js');
 })(jQuery);
 
 /* Owl Carousel
@@ -104,7 +104,7 @@ include('js/jquery.easing.1.3.js');
 ;(function ($) {
     var o = $('.owl-carousel');
     if (o.length > 0) {
-        include('js/owl.carousel.min.js');
+        include('/js/owl.carousel.min.js');
         $(document).ready(function () {
             o.owlCarousel({
                 autoplay: true,
@@ -131,9 +131,9 @@ include('js/jquery.easing.1.3.js');
 ;(function ($) {
     var o = $('.thumb');
     if (o.length > 0) {
-        include('js/jquery.fancybox.js');
-        include('js/jquery.fancybox-media.js');
-        include('js/jquery.fancybox-buttons.js');
+        include('/js/jquery.fancybox.js');
+        include('/js/jquery.fancybox-media.js');
+        include('/js/jquery.fancybox-buttons.js');
         $(document).ready(function () {
             o.fancybox();
         });
@@ -143,7 +143,7 @@ include('js/jquery.easing.1.3.js');
 /* Calendar     
 =============================================*/ 
 ;(function ($) { 
-     include('js/jquery.rd-calendar.js');
+     include('/js/jquery.rd-calendar.js');
 
     /*$(document).ready(function () {
         var o = $('.rd-calendar_1');
@@ -167,7 +167,7 @@ include('js/jquery.easing.1.3.js');
     var o = document.getElementById("google-map");
     if (o) {
         include('//maps.google.com/maps/api/js?sensor=false');
-        include('js/jquery.rd-google-map.js');
+        include('/js/jquery.rd-google-map.js');
 
         $(document).ready(function () {
             var o = $('#google-map');
@@ -187,7 +187,7 @@ include('js/jquery.easing.1.3.js');
 
     if ((navigator.userAgent.toLowerCase().indexOf('msie') == -1 ) || (isIE() && isIE() > 9)) {
         if (o.hasClass('desktop')) {
-            include('js/wow.js');
+            include('/js/wow.js');
 
             $(document).ready(function () {
                 new WOW().init();
@@ -202,7 +202,7 @@ include('js/jquery.easing.1.3.js');
 (function ($) {
     var o = $('.search-form');
     if (o.length > 0) {
-        include('js/TMSearch.js');
+        include('/js/TMSearch.js');
     }
 })(jQuery);
 
@@ -212,8 +212,8 @@ include('js/jquery.easing.1.3.js');
 (function ($) {
     var o = $('#contact-form');
     if (o.length > 0) {
-        include('js/modal.js');
-        include('js/TMForm.js'); 
+        include('/js/modal.js');
+        include('/js/TMForm.js'); 
 
         if($('#contact-form .recaptcha').length > 0){
         	include('//www.google.com/recaptcha/api/js/recaptcha_ajax.js');

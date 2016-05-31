@@ -1,0 +1,21 @@
+﻿@model freccamp.Models.Recover
+@{
+    ViewBag.Title = "recover";
+    Layout = "~/Views/Shared/layout.cshtml";
+}
+@if (Model.Registrations.Count == 0)
+{
+    <div>We're sorry, but no registrations were found for the email address: @Model.Email</div>
+}
+else
+{
+    <div>
+        <div>Here are the registrations we found for your email address (@Model.Email):</div>
+        @foreach (var reg in Model.Registrations)
+        {
+            <div>
+                @Html.ActionLink("select", "index", routeValues: new { id = reg.Item1})&nbsp;@reg.Item2
+            </div>
+        }
+    </div>
+}

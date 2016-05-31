@@ -168,6 +168,7 @@
     <Compile Include="Models\About.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\ModelBase.cs" />
+    <Compile Include="Models\Recover.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -179,6 +180,7 @@
     <Content Include="Views\Register\index.cshtml" />
     <Content Include="Views\About\index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Register\recover.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -9,53 +9,64 @@
     Already registered?  Enter your email below to find your existing registration(s) to make changes.
         @using (Html.BeginForm("recover", "register"))
         {
-            <div>
-                Email: @Html.TextBox("email") <input type="submit" value="find me" />
+            <div class="formentry">
+                @Html.TextBox("email")<br/><input type="button" value="find me" onclick="this.form.submit()" />
             </div>
         }
     </div>
     }
-            @using (Html.BeginForm("save", "register"))
-            {
-                <div>
-                    @Html.HiddenFor(m => m.CurrentReg.RegistrationId)
-                    <div class="formsectionheader">
-                    Please provide your name and either an email address or phone number where we can reach you:
-                    </div>
-                    <div class="formlabel">Your name:</div>
-                    <div class="formentry">@Html.TextBoxFor(m => m.CurrentReg.ContactName)</div>
-                    <div class="formlabel">Your email:</div>
-                    <div class="formentry">@Html.TextBoxFor(m => m.CurrentReg.ContactEmail)</div>
-                    <div class="formnote">Note: If you do not provide an email address, you will not be able to automatically recover your registration online, if you misplace the link.</div>
-                    <div class="formlabel">Your phone:</div>
-                    <div class="formentry">@Html.TextBoxFor(m => m.CurrentReg.ContactPhone)</div>
-                    <div class="formsectionheader">
-                    Next, select the camps you wish to register for:
-                    </div>
-                <table>
-                    @foreach (var camp in Model.RegularCamps)
-                    {
-                        <tr>
-                            <td>@Html.CheckBox("camp_" + camp.Id, Model.CurrentReg.Camps.Any(c => c.Id == camp.Id))</td>
-                            <td><label for="@("camp_" + camp.Id)">@camp.Name</label></td>
-                            <td>:&nbsp;</td>
-                            <td>@camp.StartDate.ToCustomDateString()</td>
-                            <td>&nbsp;to&nbsp;</td>
-                            <td>@camp.EndDate.ToCustomDateString()</td>
-                        </tr>
-                    }
-                </table>
-                Finally, tell us about the camper(s) that will be attending:
-                <div id="camperlist">
-                </div>
-                <input type="button" value="Add another camper" onclick="addNewCamper()" /><br />
-                <input type="submit" value="Save registration" />
-                <script type="text/javascript" language="javascript">
-                    @foreach (var camper in Model.CurrentReg.Campers) {
-                      @Html.Raw("AddCamper(" + camper.Id + ", '" + camper.Name + "','" + camper.Parentname + "','" + camper.Email + "','" + camper.Phone + "'," + camper.RiderLevel + ",'" + camper.Notes + "');");
-                     }
-                </script>
+    @using (Html.BeginForm("save", "register"))
+    {
+        <div>
+            @Html.HiddenFor(m => m.CurrentReg.RegistrationId)
+            <div class="formsectionheader">
+            Please provide your name and either an email address or phone number where we can reach you:
             </div>
+            <div class="formlabel">Your name:</div>
+            <div class="formentry">@Html.TextBoxFor(m => m.CurrentReg.ContactName)</div>
+            <div class="formlabel">Your email:</div>
+            <div class="formentry">@Html.TextBoxFor(m => m.CurrentReg.ContactEmail)</div>
+            <div class="formnote">Note: If you do not provide an email address, you will not be able to automatically recover your registration online, if you misplace the link.</div>
+            <div class="formlabel">Your phone:</div>
+            <div class="formentry">@Html.TextBoxFor(m => m.CurrentReg.ContactPhone)</div>
+            <div class="formsectionheader">
+            Next, select the camps you wish to register for:
+            </div>
+        <table>
+            @foreach (var camp in Model.RegularCamps)
+            {
+                <tr>
+                    <td>@Html.CheckBox("camp_" + camp.Id, Model.CurrentReg.Camps.Any(c => c.Id == camp.Id), htmlAttributes: new { @class = "campcheck", onclick = "updatePrice()" })</td>
+                    <td style="font-weight: bold"><label for="@("camp_" + camp.Id)">@camp.Name</label></td>
+                    <td>:&nbsp;</td>
+                    <td>@camp.StartDate.ToCustomDateString()</td>
+                    <td>&nbsp;to&nbsp;</td>
+                    <td>@camp.EndDate.ToCustomDateString()</td>
+                </tr>
             }
+        </table>
+        <div class="formsectionheader">
+            Finally, tell us about the camper(s) that will be attending:
+        </div>
+        <div id="camperlist">
+        </div>
+        <div class="formentry">
+            <input type="button" value="Add another camper" onclick="addNewCamper()" />
+        </div>
+        <div class="formsectionheader">Your total price is:</div>
+        <div id="totalprice" style="font-size: larger; font-weight: bold; color: green; margin-bottom: 10px;">$0</div>
+        <div class="formentry">
+            <input type="button" value="Save registration" onclick="this.form.submit()" />
+        </div>
+        <script type="text/javascript" language="javascript">
+            @foreach (var camper in Model.CurrentReg.Campers) {
+                @Html.Raw("AddCamper(" + camper.Id + ", '" + camper.Name + "','" + camper.Parentname + "','" + camper.Email + "','" + camper.Phone + "'," + camper.RiderLevel + ",'" + camper.Notes + "');");
+                }
+            @if (Model.CurrentReg.Campers.Count == 0)
+            {
+                @Html.Raw("AddCamper(1,'','','','',1,'');");
+            }
+        </script>
+    </div>
     }
 </div>
