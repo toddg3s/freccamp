@@ -111,6 +111,7 @@
     <Content Include="images\gmap_marker.png" />
     <Content Include="images\gmap_marker_active.png" />
     <Content Include="images\ie8-panel\warning_bar_0000_us.jpg" />
+    <Content Include="images\logo_header.jpg" />
     <Content Include="js\device.min.js" />
     <Content Include="js\html5shiv.js" />
     <Content Include="js\jquery-migrate-1.2.1.js" />
@@ -164,12 +165,17 @@
     <Compile Include="Migrations\201605230106422_add_registration.Designer.cs">
       <DependentUpon>201605230106422_add_registration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606031238034_add_amountpaid.cs" />
+    <Compile Include="Migrations\201606031238034_add_amountpaid.Designer.cs">
+      <DependentUpon>201606031238034_add_amountpaid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\About.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\Recover.cs" />
     <Compile Include="Models\Register.cs" />
+    <Compile Include="Models\Save.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +187,7 @@
     <Content Include="Views\About\index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Register\recover.cshtml" />
+    <Content Include="Views\Register\save.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -197,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605230106422_add_registration.resx">
       <DependentUpon>201605230106422_add_registration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606031238034_add_amountpaid.resx">
+      <DependentUpon>201606031238034_add_amountpaid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

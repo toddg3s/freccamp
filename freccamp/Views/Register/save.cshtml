@@ -1,0 +1,41 @@
+﻿@model freccamp.Models.Save
+
+@{
+    ViewBag.Title = "save";
+    Layout = "~/Views/Shared/layout.cshtml";
+}
+<div>The following camper@((Model.CurrentReg.Campers.Count > 1) ? "s" : ""):</div>
+@foreach (var camper in Model.CurrentReg.Campers) {
+    <div style="font-weight: bold">@camper.Name</div>
+}
+<div>@((Model.CurrentReg.Campers.Count > 1) ? "have" : "has") been registered for the following camp@((Model.CurrentReg.Camps.Count > 1) ? "s" : "")</div>
+@foreach (var camp in Model.CurrentReg.Camps)
+{
+    <div style="font-weight: bold">@camp.Name ( @camp.StartDate.ToShortDateString() - @camp.EndDate.ToShortDateString() )</div>
+}
+<table>
+    <tr>
+        <td>Total cost:&nbsp;</td>
+        <td>$@Model.Cost</td>
+    </tr>
+    @if (Model.CurrentReg.AmountPaid > 0) {
+        <tr>
+            <td>Amount Paid:&nbsp;</td>
+            <td>$@Model.CurrentReg.AmountPaid</td>
+        </tr>
+    }
+    @if (Model.CurrentReg.AmountPaid > 0 && Model.Cost > Model.CurrentReg.AmountPaid)
+    {
+        <tr>
+            <td>Amount due:&nbsp;</td>
+            <td>$@(Model.Cost - Model.CurrentReg.AmountPaid)</td>
+        </tr>
+    }
+    @if (Model.CurrentReg.AmountPaid > 0 && Model.Cost < Model.CurrentReg.AmountPaid)
+    {
+        <tr>
+            <td>Amount overpaid:&nbsp;</td>
+            <td>$@(Model.CurrentReg.AmountPaid - Model.Cost)</td>
+        </tr>
+    }
+</table>

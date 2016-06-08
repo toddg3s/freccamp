@@ -64,20 +64,23 @@ namespace freccamp.Controllers
     {
       var newreg = ParseRequest(Request.Form);
       var currentreg = new Registration();
+      var model = new Save();
       using (var ctx = new campdata())
       {
         if (newreg.RegistrationId != 0)
         {
           currentreg = ctx.Registrations.Find(newreg.RegistrationId);
-          currentreg.Update(newreg);
+          currentreg.Update(newreg, ctx);
         }
         else
         {
-          ctx.Registrations.Add(newreg);
+          currentreg = Registration.CreateNew(newreg, ctx);
+          ctx.Registrations.Add(currentreg);
         }
+        model.CurrentReg = currentreg;
         ctx.SaveChanges();
       }
-      return View();
+      return View(model);
     }
 
 
@@ -103,7 +106,12 @@ namespace freccamp.Controllers
       if (reg.Campers == null) { reg.Campers = new List<Camper>(); }
       foreach(var id in camperids)
       {
-        reg.Campers.Add(ParseCamper(id, form));
+        var camper = ParseCamper(id, form);
+        if (camper.Id < 100)
+        {
+          camper.Id = 0;
+        }
+        reg.Campers.Add(camper);
       }
 
       return reg;

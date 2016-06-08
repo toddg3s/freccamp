@@ -80,6 +80,7 @@ namespace freccamp
     public string ContactName { get; set; }
     public string ContactEmail { get; set; }
     public string ContactPhone { get; set; }
+    public int AmountPaid { get; set; }
     public List<Camper> Campers { get; set; }
     public List<Camp> Camps { get; set; }
 
@@ -106,20 +107,15 @@ namespace freccamp
       return sb.ToString();
     }
 
-    public void Update(Registration updreg)
+    public void Update(Registration updreg, campdata ctx)
     {
-      if (this.RegistrationId != 0 && this.RegistrationId != updreg.RegistrationId)
+      if (this.RegistrationId != updreg.RegistrationId)
       {
         throw new Exception("Attempt to update registration " + this.RegistrationId + " with data for " + updreg.RegistrationId);
       }
-      this.RegistrationId = updreg.RegistrationId;
       this.ContactName = updreg.ContactName;
       this.ContactEmail = updreg.ContactEmail;
       this.ContactPhone = updreg.ContactPhone;
-      if (this.Campers == null) this.Campers = new List<Camper>();
-      if (this.Camps == null) this.Camps = new List<Camp>();
-      if (updreg.Camps == null) updreg.Camps = new List<Camp>();
-      if (updreg.Campers == null) updreg.Campers = new List<Camper>();
       for (var i = 0; i < this.Camps.Count; i++)
       {
         if (updreg.Camps.All(c => c.Id != this.Camps[i].Id))
@@ -128,7 +124,7 @@ namespace freccamp
       for (var i = 0; i < updreg.Camps.Count; i++)
       {
         if (this.Camps.All(c => c.Id != updreg.Camps[i].Id))
-          this.Camps.Add(updreg.Camps[i]);
+          this.Camps.Add(ctx.Camps.Find(updreg.Camps[i].Id));
       }
 
       for (var i = 0; i < this.Campers.Count; i++)
@@ -139,21 +135,69 @@ namespace freccamp
 
       for (var i = 0; i < updreg.Campers.Count; i++)
       {
-        var camper = this.Campers.Where(c => c.Id == updreg.Campers[i].Id).FirstOrDefault();
-        if (camper == null)
+        if (updreg.Campers[i].Id == 0)
         {
-          this.Campers.Add(updreg.Campers[i]);
+          var c = ctx.Campers.Create();
+          c.Name = updreg.Campers[i].Name;
+          c.Parentname = (string.IsNullOrWhiteSpace(updreg.Campers[i].Parentname)) ? updreg.ContactName : updreg.Campers[i].Parentname;
+          c.Phone = updreg.Campers[i].Phone;
+          c.Email = updreg.Campers[i].Email;
+          c.RiderLevel = updreg.Campers[i].RiderLevel;
+          c.Notes = updreg.Campers[i].Notes;
+          ctx.Campers.Add(c);
+          this.Campers.Add(c);
         }
         else
         {
+          var camper = this.Campers.FirstOrDefault(c => c.Id == updreg.Campers[i].Id);
+          if (camper == null)
+          {
+            camper = ctx.Campers.Find(updreg.Campers[i].Id);
+            this.Campers.Add(camper);
+          }
           camper.Name = updreg.Campers[i].Name;
-          camper.Parentname = updreg.Campers[i].Parentname;
+          camper.Parentname = (string.IsNullOrWhiteSpace(updreg.Campers[i].Parentname)) ? updreg.ContactName : updreg.Campers[i].Parentname;
           camper.Email = updreg.Campers[i].Email;
           camper.Phone = updreg.Campers[i].Phone;
           camper.RiderLevel = updreg.Campers[i].RiderLevel;
           camper.Notes = updreg.Campers[i].Notes;
         }
       }
+    }
+
+    public static Registration CreateNew(Registration newreg, campdata ctx)
+    {
+      var reg = ctx.Registrations.Create();
+      reg.ContactName = newreg.ContactName;
+      reg.ContactEmail = newreg.ContactEmail;
+      reg.ContactPhone = newreg.ContactPhone;
+      reg.Camps = new List<Camp>();
+      foreach(var camp in newreg.Camps)
+      {
+        reg.Camps.Add(ctx.Camps.Find(camp.Id));
+      }
+      reg.Campers = new List<Camper>();
+      foreach (var camper in newreg.Campers)
+      {
+        Camper c;
+        if (camper.Id > 100)
+        {
+          c = ctx.Campers.Find(camper.Id);
+        }
+        else
+        {
+          c = ctx.Campers.Create();
+          ctx.Campers.Add(c);
+        }
+        c.Name = camper.Name;
+        c.Email = camper.Email;
+        c.Parentname = (string.IsNullOrWhiteSpace(camper.Parentname)) ? newreg.ContactName : camper.Parentname;
+        c.Phone = camper.Phone;
+        c.RiderLevel = camper.RiderLevel;
+        c.Notes = camper.Notes;
+        reg.Campers.Add(c);
+      }
+      return reg;
     }
   }
 }
