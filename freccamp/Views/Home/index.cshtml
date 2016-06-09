@@ -3,15 +3,38 @@
     ViewBag.Title = "Camps at Freedom Run Equestrian Center";
     Layout = "~/Views/Shared/layout.cshtml";
 }
-
-<table>
-    @foreach(var camp in Model.RegularCamps) {
-        <tr>
-            <td>@camp.Name</td>
-            <td>:&nbsp;</td>
-            <td>@camp.StartDate.ToCustomDateString()</td>
-            <td>&nbsp;to&nbsp;</td>
-            <td>@camp.EndDate.ToCustomDateString()</td>
-        </tr>
-    }
-</table>
+<main class="bg03 pt01">
+    <section class="well01">
+        <div class="container">
+            <div class="row">
+                <div class="grid_9">
+                    <table>
+                        @foreach (var camp in Model.RegularCamps)
+                        {
+                            <tr>
+                                <td>@camp.Name</td>
+                                <td>:&nbsp;</td>
+                                <td>@camp.StartDate.ToCustomDateString()</td>
+                                <td>&nbsp;to&nbsp;</td>
+                                <td>@camp.EndDate.ToCustomDateString()</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div class="grid_3 aside">
+                    <div class="owl-carousel">
+                        <div class="item">
+                            <img src="~/images/campphoto1.jpg" alt="">
+                        </div>
+                        <div class="item">
+                            <img src="~/images/campphoto2.jpg" alt="">
+                        </div>
+                        <div class="item">
+                            <img src="~/images/campphoto4.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

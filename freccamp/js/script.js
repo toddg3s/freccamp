@@ -21,7 +21,7 @@ include('/js/jquery.easing.1.3.js');
 (function ($) {
     var o = $('html');
     if (o.hasClass('desktop')) {
-        include('js/tmstickup.js');
+        include('/js/tmstickup.js');
 
         $(document).ready(function () {
             $('#stuck_container').TMStickUp({})

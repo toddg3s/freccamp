@@ -102,6 +102,11 @@
     <Content Include="images\banner.jpg" />
     <Content Include="images\bg.jpg" />
     <Content Include="images\blank.gif" />
+    <Content Include="images\campphoto1.jpg" />
+    <Content Include="images\campphoto2.jpg" />
+    <Content Include="images\campphoto3.jpg" />
+    <Content Include="images\campphoto4.jpg" />
+    <Content Include="images\campphoto5.jpg" />
     <Content Include="images\fancybox_loading%402x.gif" />
     <Content Include="images\fancybox_loading.gif" />
     <Content Include="images\fancybox_overlay.png" />
