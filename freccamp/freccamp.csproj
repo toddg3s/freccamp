@@ -142,6 +142,7 @@
     <Content Include="js\TMSearch.js" />
     <Content Include="js\tmstickup.js" />
     <Content Include="js\wow.js" />
+    <None Include="Properties\PublishProfiles\prod.pubxml" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

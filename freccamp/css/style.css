@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 @import url(animate.css);
 @import url(//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900,300italic);
 @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
@@ -52,7 +52,7 @@ h2 {
       font-size: 22px; } }
 
 h3 {
-  color: #05060a;
+  color: #1a1a1a;
   font-size: 26px;
   line-height: 34px;
   letter-spacing: .5px;
@@ -157,7 +157,7 @@ p + h3 {
 
 /*==================  Backgrounds  ======================*/
 .bg01 {
-  background: #05060a;
+  background: #1a1a1a;
   color: #fff; }
   .bg01 h2, .bg01 h3, .bg01 h4 {
     color: #fff; }
@@ -175,7 +175,7 @@ p + h3 {
   border: 0;
   outline: 0;
   border-radius: 5px;
-  background: #05060a;
+  background: #1a1a1a;
   color: #fff;
   height: 24px;
   line-height: 24px;
@@ -340,7 +340,7 @@ p + h3 {
   width: 155px;
   margin-top: 20px;
   padding: 10px 15px 10px;
-  background: #05060a;
+  background: #1a1a1a;
   z-index: 2;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -362,7 +362,7 @@ p + h3 {
   margin-top: 0;
   margin-left: 1px;
   padding: 10px 15px 10px;
-  background: #05060a;
+  background: #1a1a1a;
   z-index: 4; }
 
 .sf-menu ul ul > li > a {
@@ -603,7 +603,7 @@ p + h3 {
   padding-bottom: 25px; }
 
 .isStuck {
-  background: #05060a;
+  background: #1a1a1a;
   z-index: 999;
   left: 0;
   border-bottom: 1px solid #333333; }
@@ -618,7 +618,7 @@ p + h3 {
   font-size: 24px;
   line-height: 40px;
   color: #fff;
-  background: #05060a;
+  background: #1a1a1a;
   position: fixed;
   right: 66px;
   bottom: 180px;
@@ -695,11 +695,11 @@ p + h3 {
 header > .container:first-child {
   border-bottom: 2px solid #fff; }
 header .brand {
-  background: #05060a;
+  background: #1a1a1a;
   text-align: center; }
 header .nav {
   float: left;
-  background: #05060a; }
+  background: #1a1a1a; }
 header .search-wrap {
   position: relative;
   float: right; }
@@ -735,7 +735,7 @@ main {
   text-align: center; }
 
 .carousel_cnt {
-  background: #05060a;
+  background: #1a1a1a;
   color: #fff;
   padding: 10px 25px 15px; }
   .carousel_cnt p {
@@ -759,7 +759,7 @@ main {
 
 .num {
   margin-bottom: 15px;
-  color: #05060a;
+  color: #1a1a1a;
   font-size: 26px;
   line-height: 34px;
   letter-spacing: .5px;

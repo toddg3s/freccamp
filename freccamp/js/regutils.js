@@ -246,10 +246,10 @@
 
 function addNewCamper()
 {
-    var campers = document.getElementsByClassName('camperdetail');
+    var campers = document.getElementsByClassName("camperdetail");
     var id = campers.length + 1;
-    AddCamper(id, '', '', '', '', 1, '');
-    var name = document.getElementById('campername_' + id);
+    AddCamper(id, "", "", "", "", 1, "");
+    var name = document.getElementById("campername_" + id);
     if (name) {
         name.focus();
     }
@@ -275,11 +275,11 @@ function updatePrice()
     }
     var campers = document.getElementsByClassName('camperdetail');
 
-    var price = 450 * count;
-    if (campers.length > 1) {
+    var price = 450 * count * campers.length;
+    if (campers.length > 1 || count > 1) {
         price = price - 50;
     }
 
     var totalprice = document.getElementById('totalprice');
-    totalprice.innerText = '$' + price;
+    totalprice.innerText = "$" + price;
 }

@@ -47,10 +47,15 @@ namespace freccamp.Controllers
         model.Email = Request.Form["email"].Trim();
         using(var ctx = new campdata())
         {
-          var regs = (from r in ctx.Registrations 
-                      where r.ContactEmail.Trim().Equals(model.Email, StringComparison.InvariantCultureIgnoreCase) 
-                      select new Tuple<int, string>(r.RegistrationId, r.GetSummary())).ToList();
-          model.Registrations = regs.ToList();
+          var regids = (from r in ctx.Registrations
+                      where r.ContactEmail.Trim().Equals(model.Email, StringComparison.InvariantCultureIgnoreCase)
+                      select r.RegistrationId).ToList();
+          model.Registrations = new List<Tuple<int, string>>();
+          foreach (var regid in regids)
+          {
+            var reg = ctx.Registrations.Find(regid);
+            model.Registrations.Add(new Tuple<int, string>(regid, reg.GetSummary()));
+          }
         }
         if(model.Registrations.Count == 1)
         {
@@ -79,6 +84,11 @@ namespace freccamp.Controllers
         }
         model.CurrentReg = currentreg;
         ctx.SaveChanges();
+      }
+      model.Cost = currentreg.Campers.Count*model.CurrentReg.Camps.Count*450;
+      if (model.CurrentReg.Campers.Count > 1 || model.CurrentReg.Camps.Count > 1)
+      {
+        model.Cost -= 50;
       }
       return View(model);
     }
