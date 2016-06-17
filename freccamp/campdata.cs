@@ -49,6 +49,34 @@ namespace freccamp
               m.MapRightKey("RegistrationId");
               m.ToTable("CamperRegistration");
           });
+
+      modelBuilder.Entity<Registration>().
+        HasMany(r => r.Campers).
+        WithMany(c => c.Registrations).
+        Map(
+          m =>
+          {
+            m.MapLeftKey("RegistrationId");
+            m.MapRightKey("Id");
+            m.ToTable("CamperRegistration");
+          });
+
+      modelBuilder.Entity<Registration>().
+        HasMany(r => r.Camps).
+        WithMany(c => c.Registrations).
+        Map(
+          m =>
+          {
+            m.MapLeftKey("RegistrationId");
+            m.MapRightKey("Id");
+            m.ToTable("CampRegistration");
+          });
+        }
+
+    public Registration GetFullReg(int id)
+    {
+      var reg = this.Registrations.Find(id);
+      return reg;
     }
   }
 
@@ -59,7 +87,7 @@ namespace freccamp
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public bool Advanced { get; set; }
-    public ICollection<Registration> Registrations { get; set; }
+    public virtual ICollection<Registration> Registrations { get; set; }
   }
 
   public class Camper
@@ -71,7 +99,7 @@ namespace freccamp
     public string Phone { get; set; }
     public int RiderLevel { get; set; }
     public string Notes { get; set; }
-    public ICollection<Registration> Registrations { get; set; }
+    public virtual ICollection<Registration> Registrations { get; set; }
   }
 
   public class Registration
@@ -81,8 +109,8 @@ namespace freccamp
     public string ContactEmail { get; set; }
     public string ContactPhone { get; set; }
     public int AmountPaid { get; set; }
-    public List<Camper> Campers { get; set; }
-    public List<Camp> Camps { get; set; }
+    public virtual ICollection<Camper> Campers { get; set; }
+    public virtual ICollection<Camp> Camps { get; set; }
 
     public string GetSummary()
     {
@@ -118,49 +146,59 @@ namespace freccamp
       this.ContactPhone = updreg.ContactPhone;
       for (var i = 0; i < this.Camps.Count; i++)
       {
-        if (updreg.Camps.All(c => c.Id != this.Camps[i].Id))
-          this.Camps.RemoveAt(i--);
+        var camp = this.Camps.ElementAt(i);
+        if (updreg.Camps.All(c => c.Id != camp.Id))
+        {
+          this.Camps.Remove(camp);
+          i--;
+        }
       }
       for (var i = 0; i < updreg.Camps.Count; i++)
       {
-        if (this.Camps.All(c => c.Id != updreg.Camps[i].Id))
-          this.Camps.Add(ctx.Camps.Find(updreg.Camps[i].Id));
+        var camp = updreg.Camps.ElementAt(i);
+        if (this.Camps.All(c => c.Id != camp.Id))
+          this.Camps.Add(ctx.Camps.Find(camp.Id));
       }
 
       for (var i = 0; i < this.Campers.Count; i++)
       {
-        if (updreg.Campers.All(c => c.Id != this.Campers[i].Id))
-          this.Campers.RemoveAt(i);
+        var camper = this.Campers.ElementAt(i);
+        if (updreg.Campers.All(c => c.Id != camper.Id))
+        {
+          this.Campers.Remove(camper);
+          i--;
+        }
       }
 
       for (var i = 0; i < updreg.Campers.Count; i++)
       {
-        if (updreg.Campers[i].Id == 0)
+        var camper2 = updreg.Campers.ElementAt(i);
+        if (camper2.Id == 0)
         {
           var c = ctx.Campers.Create();
-          c.Name = updreg.Campers[i].Name;
-          c.Parentname = (string.IsNullOrWhiteSpace(updreg.Campers[i].Parentname)) ? updreg.ContactName : updreg.Campers[i].Parentname;
-          c.Phone = updreg.Campers[i].Phone;
-          c.Email = updreg.Campers[i].Email;
-          c.RiderLevel = updreg.Campers[i].RiderLevel;
-          c.Notes = updreg.Campers[i].Notes;
+          c.Name = camper2.Name;
+          c.Parentname = (string.IsNullOrWhiteSpace(camper2.Parentname)) ? updreg.ContactName : camper2.Parentname;
+          c.Phone = camper2.Phone;
+          c.Email = camper2.Email;
+          c.RiderLevel = camper2.RiderLevel;
+          c.Notes = camper2.Notes;
           ctx.Campers.Add(c);
           this.Campers.Add(c);
         }
         else
         {
-          var camper = this.Campers.FirstOrDefault(c => c.Id == updreg.Campers[i].Id);
+          var camper = this.Campers.FirstOrDefault(c => c.Id == camper2.Id);
           if (camper == null)
           {
-            camper = ctx.Campers.Find(updreg.Campers[i].Id);
+            camper = ctx.Campers.Find(camper2.Id);
             this.Campers.Add(camper);
           }
-          camper.Name = updreg.Campers[i].Name;
-          camper.Parentname = (string.IsNullOrWhiteSpace(updreg.Campers[i].Parentname)) ? updreg.ContactName : updreg.Campers[i].Parentname;
-          camper.Email = updreg.Campers[i].Email;
-          camper.Phone = updreg.Campers[i].Phone;
-          camper.RiderLevel = updreg.Campers[i].RiderLevel;
-          camper.Notes = updreg.Campers[i].Notes;
+          camper.Name = camper2.Name;
+          camper.Parentname = (string.IsNullOrWhiteSpace(camper2.Parentname)) ? updreg.ContactName : camper2.Parentname;
+          camper.Email = camper2.Email;
+          camper.Phone = camper2.Phone;
+          camper.RiderLevel = camper2.RiderLevel;
+          camper.Notes = camper2.Notes;
         }
       }
     }

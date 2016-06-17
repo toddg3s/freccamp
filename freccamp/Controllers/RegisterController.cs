@@ -14,29 +14,36 @@ namespace freccamp.Controllers
     {
       if (id.HasValue && id.Value != 0)
       {
-        return View(new Register()
+
+        using (var ctx = new campdata() { Configuration = { LazyLoadingEnabled =  false }})
         {
-          CurrentReg = new Registration()
+          var reg = new Register()
           {
-            RegistrationId = id.Value,
-            ContactName = "Todd Gray",
-            ContactEmail = "todd@g3s.net",
-            ContactPhone = "425-555-1212",
-            Camps = new List<Camp>()
-              {
-                new Camp() { Id="session1", Name = "Session 1", StartDate = DateTime.Now, EndDate=DateTime.Now}
-              },
-            Campers = new List<Camper>()
-              {
-                new Camper() {Id = 1, Name = "Jasmine Gray", Email = "jazzyg218@gmail.com", RiderLevel=5}
-              }
-          }
-        });
+            CurrentReg = ctx.Registrations.Include("Campers").Include("Camps").FirstOrDefault(r => r.RegistrationId == id.Value)
+          };          
+          return View(reg);
+        }
+        //return View(new Register()
+        //{
+        //  CurrentReg = new Registration()
+        //  {
+        //    RegistrationId = id.Value,
+        //    ContactName = "Todd Gray",
+        //    ContactEmail = "todd@g3s.net",
+        //    ContactPhone = "425-555-1212",
+        //    Camps = new List<Camp>()
+        //      {
+        //        new Camp() { Id="session1", Name = "Session 1", StartDate = DateTime.Now, EndDate=DateTime.Now}
+        //      },
+        //    Campers = new List<Camper>()
+        //      {
+        //        new Camper() {Id = 1, Name = "Jasmine Gray", Email = "jazzyg218@gmail.com", RiderLevel=5}
+        //      }
+        //  }
+        //});
       }
-      else
-      {
-        return View(new Register());
-      }
+
+      return View(new Register());
     }
 
     public ActionResult Recover()
@@ -53,7 +60,7 @@ namespace freccamp.Controllers
           model.Registrations = new List<Tuple<int, string>>();
           foreach (var regid in regids)
           {
-            var reg = ctx.Registrations.Find(regid);
+            var reg = ctx.Registrations.Include("Camps").Include("Campers").FirstOrDefault(r => r.RegistrationId == regid);
             model.Registrations.Add(new Tuple<int, string>(regid, reg.GetSummary()));
           }
         }
